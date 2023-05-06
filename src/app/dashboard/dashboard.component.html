@@ -1,0 +1,80 @@
+<div class="container h-100 py-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 style="color: rgb(89, 89, 89);">I am {{cuser}}</h1> 
+        <h3>{{dd|date:'yyyy-mm-dd'}}</h3>
+        <!-- <app-animation></app-animation> -->
+        <app-delete-confirm  (onCancel)="canceldelete()" (onDelete)="deleteAccount($event)"  [item]="acno"></app-delete-confirm>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-around align-items-center h-100" [ngClass]="acno?'db':''">
+
+
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 pb-3">
+        <div class="card " style="border-radius: 1rem;background-color: rgb(11, 6, 23);">
+          <div class="card-body  text-center text-light p-5" >       
+              <div class="mb-md-3 mt-md-4 pb-2">
+                <h2 appDierative>Deposit</h2>
+              </div>
+              <form [formGroup]="dform" (ngSubmit)="clicked()">
+                <div class="form-group pb-3 ">
+                  <input type="text" class="form-control form-control-lg"  placeholder="Account Number" formControlName="dacc"/>
+                  <div *ngIf="this.dform.get('dacc')?.errors && this.dform.get('dacc')?.touched" class="text-danger">invalid</div>
+                </div> 
+                <div class="form-group pb-3 ">
+                  <input type="password" class="form-control form-control-lg"  placeholder="Password" formControlName="dpassword"/>
+                  <div *ngIf="this.dform.get('dpassword')?.errors && this.dform.get('dpassword')?.touched">invalid</div>
+                </div>               
+                <div class="form-group pb-3 ">
+                  <input type="number" class="form-control form-control-lg"  placeholder="Amount" formControlName="damount"/>
+                  <div *ngIf="this.dform.get('damount')?.errors && this.dform.get('damount')?.touched">invalid</div>
+                </div>   
+                <button class="btn btn-outline-light btn-lg mt-4" [disabled]="dform.invalid" >Deposit</button>
+              </form>             
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="card" style="border-radius: 1rem;background-color: rgb(11, 6, 23)">
+          <div class="card-body  text-center text-light p-5" >        
+              <div class="mb-md-3 mt-md-4 pb-2">
+                <h2 appDierative>Withdrawal</h2>
+              </div>
+              <form [formGroup]="wform" (ngSubmit)="clicked1()">
+              <div class="form-group pb-3 ">
+                <input type="text" class="form-control form-control-lg"  placeholder="Account Number" formControlName="wacc" />
+                <div *ngIf="this.wform.get('wacc')?.errors && this.dform.get('wacc')?.touched">invalid</div>
+              </div>
+              <div class="form-group pb-3 ">
+                <input type="password" class="form-control form-control-lg"  placeholder="Password" formControlName="wpassword" />
+                <div *ngIf="this.wform.get('wpassword')?.errors && this.dform.get('wpassword')?.touched">invalid</div>
+              </div>            
+              <div class="form-group pb-3 ">
+                <input type="text" class="form-control form-control-lg"  placeholder="Amount" formControlName="wamount"/>
+                <div *ngIf="this.wform.get('wamount')?.errors && this.dform.get('wamount')?.touched">invalid</div>
+              </div>
+              <button class="btn btn-outline-light btn-lg mt-4" [disabled]="wform.invalid" type="submit"  >Withdraw</button>
+            </form>   
+          </div>
+        </div>
+      </div>
+    
+    
+    </div>
+    
+    <div class="row mt-5">
+      <div class="col-12 text-center display-5">
+        <a  style="font-size: 30px;color:rgb(0, 0, 0)" routerLink="/trans">view transactions</a>
+      </div>
+      <div>
+        <button class="btn btn-danger" (click)="deleteacc()">Delete Account</button>
+        <button class="btn-success" type="button"  (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+    
+
+  </div>
